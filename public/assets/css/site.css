@@ -985,3 +985,17 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 @media (prefers-reduced-motion: reduce) { .dp.dp--sheet { transition: none; } }
 /* RTL calendar: arrows follow reading direction */
 .dp__nav svg { transform: scaleX(-1); }
+
+/* v8 — wider content on large desktops: fluid side padding, wider max width */
+:root { --container: 1480px; --gutter: clamp(16px, 4vw, 72px); }
+.container { width: min(100% - 2 * var(--gutter), var(--container)); }
+@media (min-width: 1700px) {
+  :root { --container: 1640px; }
+  .hero__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 600px); gap: 64px; }
+  .hero__media { height: clamp(420px, 30vw, 560px); }
+  .hero h1 { font-size: clamp(48px, 2.9vw, 58px); }
+  .hero__lead { font-size: 20px; max-width: 40em; }
+  .section-head { max-width: 860px; }
+  .faq { max-width: 1040px; }
+}
+@media (min-width: 2200px) { :root { --container: 1840px; } body { font-size: 17px; } }
