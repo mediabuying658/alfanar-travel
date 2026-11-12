@@ -277,6 +277,8 @@ function consent(ctx) {
 export function layout(ctx, page, body) {
   const cfg = ctx.cfg;
   const canonical = cfg.siteUrl.replace(/\/$/, '') + (page.route === '/' ? '/' : page.route);
+  // absolute base for link previews: the real domain once set, otherwise the current preview host
+  const shareBase = (cfg.siteUrl.includes('REPLACE') ? (cfg.previewUrl || '') : cfg.siteUrl).replace(/\/$/, '');
   const ld = page.jsonld ? page.jsonld.map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n') : '';
   const hp = page.heroPreload && fs.existsSync(path.join(ctx.root, 'public/assets/img', page.heroPreload + '-800.avif'));
   const preloadHero = hp ? `<link rel="preload" as="image" type="image/avif" imagesrcset="${ctx.asset('img/' + page.heroPreload + '-800.avif')} 800w, ${ctx.asset('img/' + page.heroPreload + '-1600.avif')} 1600w" imagesizes="(max-width: 1000px) 100vw, 50vw" fetchpriority="high">` : '';
@@ -295,7 +297,7 @@ ${page.noindex || cfg.showPlaceholders ? '<meta name="robots" content="noindex, 
 <meta property="og:locale" content="ar_KW">
 <meta property="og:title" content="${esc(page.title)}">
 <meta property="og:description" content="${esc(page.description)}">
-<meta property="og:url" content="${esc(canonical)}">
+<meta property="og:url" content="${esc(cfg.siteUrl.includes('REPLACE') ? shareBase + (page.route === '/' ? '/' : page.route + '/') : canonical)}">
 <meta property="og:site_name" content="${esc(cfg.brand.nameAr)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -310,7 +312,15 @@ ${page.form ? `<script type="speculationrules">${JSON.stringify({ prefetch: [{ s
 <link rel="icon" type="image/png" sizes="16x16" href="${ctx.asset('img/brand/favicon-16.png')}">
 <link rel="apple-touch-icon" href="${ctx.asset('img/brand/apple-touch-icon.png')}">
 <link rel="manifest" href="${ctx.asset('site.webmanifest')}">
-${page.heroPreload ? `<meta property="og:image" content="${esc(cfg.siteUrl.replace(/\/$/, '') + '/assets/img/' + page.heroPreload + '-1600.jpg')}">` : `<meta property="og:image" content="${esc(cfg.siteUrl.replace(/\/$/, '') + '/assets/img/brand/icon-512.png')}">`}
+<meta property="og:image" content="${esc(shareBase + '/assets/img/brand/og-image.png')}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${esc(cfg.brand.nameAr)} — Al-Fanar Travel &amp; Tourism">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(page.title)}">
+<meta name="twitter:description" content="${esc(page.description)}">
+<meta name="twitter:image" content="${esc(shareBase + '/assets/img/brand/og-image.png')}">
 <script src="${ctx.asset('js/config.js')}"></script>
 <script src="${ctx.asset('js/app.js')}" defer></script>
 ${page.form ? `<script src="${ctx.asset('js/controls.js')}" defer></script>

@@ -110,5 +110,6 @@
     }
   ],
   "_designClaims_note": "Claims that appear in the 4 page designs. They render on the site only after Al Fanar sets approved=true with evidence.",
-  "showEditorNotes": false
+  "showEditorNotes": false,
+  "previewUrl": "https://mediabuying658.github.io/alfanar-travel"
 }
