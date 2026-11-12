@@ -113,7 +113,7 @@ export function field(form, d) {
     case 'single-check':
       return `<div class="field${d.full ? ' f-full' : ''}" data-field="${d.name}" data-type="single-check" data-msg-label="${esc(d.msg || d.label)}"${d.showWhen ? ` data-show-when="${d.showWhen}" hidden` : ''}><label class="check-inline"><input type="checkbox" id="${id}" name="${d.name}" value="yes"${dis}> ${esc(d.label)}</label><span class="err" id="${id}-err"></span></div>`;
     case 'budget':
-      return wrap(form, d, `<div class="budget"><input class="input" type="number" inputmode="decimal" min="1" step="1" data-step="${d.unitSuffix === 'لليلة' ? 5 : 10}" id="${id}" name="${d.name}"${reqAttr(d)} ${describedBy(form, d)} placeholder="${esc(d.placeholder || 'مثال: 60')}"${dis}><span class="budget__cur" aria-label="دينار كويتي" title="دينار كويتي">د.ك</span><input type="hidden" name="${d.name}_currency" value="KWD"><label class="check-inline"><input type="checkbox" name="${d.name}_flexible" value="yes"${dis}> مرنة</label></div>`);
+      return wrap(form, d, `<div class="budget"><input class="input" type="number" inputmode="decimal" min="1" step="1" data-step="100" id="${id}" name="${d.name}"${reqAttr(d)} ${describedBy(form, d)} placeholder="${esc(d.placeholder || 'مثال: 60')}"${dis}><span class="budget__cur" aria-label="دينار كويتي" title="دينار كويتي">د.ك</span><input type="hidden" name="${d.name}_currency" value="KWD"><label class="check-inline"><input type="checkbox" name="${d.name}_flexible" value="yes"${dis}> مرنة</label></div>`);
     default:
       throw new Error('Unknown field type ' + d.type);
   }

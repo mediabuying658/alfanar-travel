@@ -499,7 +499,7 @@
     wrap.className = 'num';
     input.parentNode.insertBefore(wrap, input);
     wrap.appendChild(input);
-    var step = parseFloat(input.dataset.step || 10);
+    var step = parseFloat(input.dataset.step || 100);
     var box = document.createElement('div');
     box.className = 'num__steps';
     box.innerHTML = '<button type="button" tabindex="-1" data-d="1" aria-label="زيادة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>' +
@@ -509,8 +509,9 @@
     function bump(d) {
       if (input.disabled) return;
       var v = parseFloat(input.value) || 0;
-      v = Math.max(parseFloat(input.min) || 0, Math.round((v + d * step) / step) * step);
-      input.value = v;
+      v = v + d * step;            // exact step from whatever was typed (e.g. 25 → 125)
+      input.value = v > 0 ? v : '';  // stepping below zero clears the field
+
       input.dispatchEvent(new Event('input', { bubbles: true }));
       input.dispatchEvent(new Event('change', { bubbles: true }));
       wrap.classList.remove('is-bump'); void wrap.offsetWidth; wrap.classList.add('is-bump');

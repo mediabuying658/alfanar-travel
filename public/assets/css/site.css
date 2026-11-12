@@ -1009,3 +1009,8 @@ body { background: var(--sand-50); min-height: 100vh; }
 /* v9b — the strip behind the fixed header is header-blue, so nothing white opens up when the page is pulled down */
 body:has(.hero) { background: linear-gradient(var(--blue) 0, var(--blue) calc(var(--hdr-h, 76px) + 400px), var(--sand-50) calc(var(--hdr-h, 76px) + 400px)); }
 .offers .offer h3 { font-size: 18px; }
+/* v10 — subtle feedback when stepping numbers (no more swelling) */
+.num.is-bump .input { animation: tick .35s ease; }
+.counter.is-bump input { animation: tickText .3s ease; }
+@keyframes tick { 0% { border-color: var(--line); } 35% { border-color: var(--blue); background-color: #F3F5FC; } 100% { border-color: var(--line); background-color: #fff; } }
+@keyframes tickText { 0% { opacity: 1; } 35% { opacity: .55; transform: translateY(1px); } 100% { opacity: 1; transform: none; } }
