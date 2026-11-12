@@ -999,3 +999,6 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   .faq { max-width: 1040px; }
 }
 @media (min-width: 2200px) { :root { --container: 1840px; } body { font-size: 17px; } }
+/* v8b — no white flash when over-scrolling (rubber-band) at the top or bottom */
+html { background: var(--blue); overscroll-behavior-y: none; }
+body { background: var(--sand-50); min-height: 100vh; }

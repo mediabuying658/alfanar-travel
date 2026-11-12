@@ -282,6 +282,7 @@ export function layout(ctx, page, body) {
 <link rel="canonical" href="${esc(canonical)}">
 ${page.noindex || cfg.showPlaceholders ? '<meta name="robots" content="noindex, nofollow"><!-- pre-launch: remove by setting showPlaceholders=false -->' : '<meta name="robots" content="index, follow">'}
 <meta name="theme-color" content="#28387F">
+<meta name="color-scheme" content="light">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ar_KW">
 <meta property="og:title" content="${esc(page.title)}">
