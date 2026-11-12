@@ -111,7 +111,6 @@
     }
     function open() {
       if (btn.disabled) return;
-      hoverDay = null;
       if (openInstance && openInstance !== api) openInstance.close();
       openInstance = api;
       root.classList.add('is-open');
@@ -387,6 +386,7 @@
     function focusCurrent() { var b = pop.querySelector('.dp__day.is-focus'); if (b) b.focus({ preventScroll: true }); }
     function open() {
       if (btn.disabled) return;
+      hoverDay = null;
       if (openInstance && openInstance !== api) openInstance.close();
       openInstance = api;
       var bnd = bounds();

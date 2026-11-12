@@ -23,7 +23,7 @@ export function makeCtx({ cfg, mode, route, root }) {
     // value or visible placeholder
     ph: (value, label) => {
       if (value) return esc(value);
-      return cfg.showPlaceholders ? `<span class="ph" title="بانتظار الاعتماد">[${esc(label)}]</span>` : '';
+      return cfg.showEditorNotes !== false && cfg.showPlaceholders ? `<span class="ph" title="بانتظار الاعتماد">[${esc(label)}]</span>` : '';
     }
   };
   return ctx;
@@ -46,7 +46,7 @@ export function media(ctx, { file, alt, ar = '4/3', eager = false, icon = 'bed',
     const badgeHtml = badge ? '<span class="media__badge" aria-hidden="true">صورة توضيحية</span>' : '';
     return `<figure class="media ${cls}"${vars ? ` style="${vars}"` : ''}><picture>${avif ? `<source type="image/avif" srcset="${avif}" sizes="${sizes}">` : ''}${webp ? `<source type="image/webp" srcset="${webp}" sizes="${sizes}">` : ''}<img src="${src(file + '.jpg')}"${jpg ? ` srcset="${jpg}" sizes="${sizes}"` : ''} alt="${esc(alt)}" width="${w * 400}" height="${h * 400}"${posStyle} ${eager ? 'fetchpriority="high" decoding="async"' : 'loading="lazy" decoding="async"'}></picture>${badgeHtml}</figure>`;
   }
-  const label = ctx.cfg.showPlaceholders
+  const label = ctx.cfg.showPlaceholders && ctx.cfg.showEditorNotes !== false
     ? `<span class="media__label">صورة مرخّصة مطلوبة: ${esc(need)}<br><code>assets/img/${esc(file)}.jpg</code></span>` : '';
   return `<figure class="media media--missing ${cls}"${style} ${alt ? ` role="img" aria-label="${esc(alt)}"` : ' aria-hidden="true"'}><div class="media__art">${I[icon] || ''}${label}</div></figure>`;
 }
@@ -113,7 +113,7 @@ export function field(form, d) {
     case 'single-check':
       return `<div class="field${d.full ? ' f-full' : ''}" data-field="${d.name}" data-type="single-check" data-msg-label="${esc(d.msg || d.label)}"${d.showWhen ? ` data-show-when="${d.showWhen}" hidden` : ''}><label class="check-inline"><input type="checkbox" id="${id}" name="${d.name}" value="yes"${dis}> ${esc(d.label)}</label><span class="err" id="${id}-err"></span></div>`;
     case 'budget':
-      return wrap(form, d, `<div class="budget"><input class="input" type="number" inputmode="decimal" min="1" step="1" data-step="${d.unitSuffix === 'لليلة' ? 5 : 10}" id="${id}" name="${d.name}"${reqAttr(d)} ${describedBy(form, d)} placeholder="${esc(d.placeholder || 'مثال: 60')}"${dis}><select class="select select--mini" name="${d.name}_currency" aria-label="العملة"${dis}>${CURRENCIES.map(([v, short, long]) => `<option value="${v}" data-short="${short}"${v === 'KWD' ? ' selected' : ''}>${short} — ${long}</option>`).join('')}</select><label class="check-inline"><input type="checkbox" name="${d.name}_flexible" value="yes"${dis}> مرنة</label></div>`);
+      return wrap(form, d, `<div class="budget"><input class="input" type="number" inputmode="decimal" min="1" step="1" data-step="${d.unitSuffix === 'لليلة' ? 5 : 10}" id="${id}" name="${d.name}"${reqAttr(d)} ${describedBy(form, d)} placeholder="${esc(d.placeholder || 'مثال: 60')}"${dis}><span class="budget__cur" aria-label="دينار كويتي" title="دينار كويتي">د.ك</span><input type="hidden" name="${d.name}_currency" value="KWD"><label class="check-inline"><input type="checkbox" name="${d.name}_flexible" value="yes"${dis}> مرنة</label></div>`);
     default:
       throw new Error('Unknown field type ' + d.type);
   }
@@ -182,7 +182,7 @@ const NAV = [
 function brandBlock(ctx) {
   const b = ctx.cfg.brand;
   if (b.logoFile) return `<a class="brand" href="${ctx.link('/')}" aria-label="${esc(b.nameAr)} — الصفحة الرئيسية"><img src="${ctx.asset('img/' + b.logoFile)}" alt="Al-Fanar Travel &amp; Tourism — ${esc(b.nameAr)}" width="345" height="290"></a>`;
-  return `<a class="brand" href="${ctx.link('/')}" aria-label="${esc(b.nameAr)} — الصفحة الرئيسية"${ctx.cfg.showPlaceholders ? ' title="شعار مؤقت — بانتظار الشعار الرسمي"' : ''}><span class="brand__mark" style="color:var(--yellow)">${I.lighthouse}</span><span class="brand__text" lang="en"><span class="brand__en1">AL FANAR</span><span class="brand__en2">TRAVEL &amp; TOURISM</span></span><span class="sr-only" lang="ar">${esc(b.nameAr)}</span></a>`;
+  return `<a class="brand" href="${ctx.link('/')}" aria-label="${esc(b.nameAr)} — الصفحة الرئيسية"><span class="brand__mark" style="color:var(--yellow)">${I.lighthouse}</span><span class="brand__text" lang="en"><span class="brand__en1">AL FANAR</span><span class="brand__en2">TRAVEL &amp; TOURISM</span></span><span class="sr-only" lang="ar">${esc(b.nameAr)}</span></a>`;
 }
 
 function header(ctx, page) {
@@ -404,14 +404,14 @@ export function trust(ctx, title, items) {
     ['السجل التجاري', L.commercialRegistration, 'رقم السجل التجاري'],
     ['رقم الترخيص', L.tourismLicense, 'رقم الترخيص'],
     ['اعتماد IATA', L.iataAccreditation, 'رقم IATA إن وُجد'],
-  ].filter(([, v]) => v || ctx.cfg.showPlaceholders);
+  ].filter(([, v]) => v || (ctx.cfg.showPlaceholders && ctx.cfg.showEditorNotes !== false));
   const map = ctx.cfg.contact.mapsUrl ? `<li><b>موقعنا:</b> <a href="${esc(ctx.cfg.contact.mapsUrl)}" target="_blank" rel="noopener" style="color:#fff">عرض على خرائط Google</a></li>` : '';
   return `
 <section class="section section--navy" aria-labelledby="trust-h">
   <div class="container">
     <div class="section-head"><h2 id="trust-h">${title}</h2><p>نوضّح لك كل شيء قبل أي التزام — بدون وعود لا نستطيع إثباتها.</p></div>
     <div class="trust">${items.map(([ic, h, p]) => `<div class="trust__item">${I[ic]}<h3>${h}</h3><p>${p}</p></div>`).join('')}${(ctx.cfg.services.designClaims || []).filter((c) => c.approved && (!c.pages || c.pages === 'all' || String(c.pages).split(',').map((x) => x.trim()).includes(ctx.route))).map((c) => `<div class="trust__item">${I[c.icon] || I.star}<h3>${esc(c.textAr)}</h3><p>${esc(c.detailAr)}</p></div>`).join('')}</div>
-    ${ctx.cfg.showPlaceholders && (ctx.cfg.services.designClaims || []).some((c) => !c.approved) ? `<div class="ph-block" style="margin-top:18px">عبارات موجودة في التصاميم ومخفية حتى يعتمدها الفنار بدليل: ${(ctx.cfg.services.designClaims || []).filter((c) => !c.approved).map((c) => '«' + esc(c.textAr) + '»').join('، ')}. فعّلها من <code>site.config.json → services.designClaims</code>.</div>` : ''}
+    ${ctx.cfg.showPlaceholders && ctx.cfg.showEditorNotes !== false && (ctx.cfg.services.designClaims || []).some((c) => !c.approved) ? `<div class="ph-block" style="margin-top:18px">عبارات موجودة في التصاميم ومخفية حتى يعتمدها الفنار بدليل: ${(ctx.cfg.services.designClaims || []).filter((c) => !c.approved).map((c) => '«' + esc(c.textAr) + '»').join('، ')}. فعّلها من <code>site.config.json → services.designClaims</code>.</div>` : ''}
     ${facts.length || map ? `<ul class="biz-facts">${facts.map(([k, v, l]) => `<li><b>${k}:</b> ${ctx.ph(v, l)}</li>`).join('')}${map}</ul>` : ''}
   </div>
 </section>`;

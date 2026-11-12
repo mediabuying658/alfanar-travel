@@ -1002,3 +1002,10 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 /* v8b — no white flash when over-scrolling (rubber-band) at the top or bottom */
 html { background: var(--blue); overscroll-behavior-y: none; }
 body { background: var(--sand-50); min-height: 100vh; }
+/* v9 — fixed currency label (KWD), not a control */
+.budget { grid-template-columns: minmax(0, 1fr) auto auto; }
+.budget__cur { display: grid; place-items: center; min-width: 64px; height: 50px; padding: 0 14px; border-radius: 12px; background: var(--sand-100); color: var(--blue); font-weight: 800; font-size: 15px; user-select: none; pointer-events: none; transition: opacity .25s; }
+.field.is-flexible .budget__cur { opacity: .5; }
+/* v9b — the strip behind the fixed header is header-blue, so nothing white opens up when the page is pulled down */
+body:has(.hero) { background: linear-gradient(var(--blue) 0, var(--blue) calc(var(--hdr-h, 76px) + 400px), var(--sand-50) calc(var(--hdr-h, 76px) + 400px)); }
+.offers .offer h3 { font-size: 18px; }

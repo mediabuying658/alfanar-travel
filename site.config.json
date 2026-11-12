@@ -34,7 +34,29 @@
     "honeymoonPackagesConfirmed": false,
     "umrahPackagesConfirmed": false,
     "umrahVisaServiceConfirmed": false,
-    "hotelOffers": [],
+    "hotelOffers": [
+      {
+        "titleAr": "اسم العرض الأول",
+        "detailsAr": "اكتب تفاصيل العرض هنا (الفندق، المدينة، ما يشمله العرض).",
+        "validUntil": "",
+        "termsAr": "اكتب شروط العرض هنا.",
+        "source": ""
+      },
+      {
+        "titleAr": "اسم العرض الثاني",
+        "detailsAr": "اكتب تفاصيل العرض هنا (الفندق، المدينة، ما يشمله العرض).",
+        "validUntil": "",
+        "termsAr": "اكتب شروط العرض هنا.",
+        "source": ""
+      },
+      {
+        "titleAr": "اسم العرض الثالث",
+        "detailsAr": "اكتب تفاصيل العرض هنا (الفندق، المدينة، ما يشمله العرض).",
+        "validUntil": "",
+        "termsAr": "اكتب شروط العرض هنا.",
+        "source": ""
+      }
+    ],
     "designClaims": [
       {
         "textAr": "خبرة في تنظيم الرحلات",
@@ -87,5 +109,6 @@
       "source": "مرجع داخلي للتحقق"
     }
   ],
-  "_designClaims_note": "Claims that appear in the 4 page designs. They render on the site only after Al Fanar sets approved=true with evidence."
+  "_designClaims_note": "Claims that appear in the 4 page designs. They render on the site only after Al Fanar sets approved=true with evidence.",
+  "showEditorNotes": false
 }

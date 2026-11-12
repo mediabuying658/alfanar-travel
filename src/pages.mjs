@@ -46,7 +46,7 @@ export function hotels(ctx) {
     ], 3),
     stack(
       field(F, { type: 'text', name: 'childAges', label: 'أعمار الأطفال', msg: 'أعمار الأطفال', showWhen: 'children>0', placeholder: 'مثال: 4 و 9 سنوات', hint: 'تساعد في معرفة سياسة الفندق وسعر الأطفال', full: true }),
-      field(F, { type: 'budget', name: 'budget', label: 'الميزانية التقريبية لليلة', msg: 'الميزانية لليلة', required: true, unitSuffix: 'لليلة', hint: 'لكل الغرف معاً — اختر العملة أو «مرنة»', full: true }),
+      field(F, { type: 'budget', name: 'budget', label: 'الميزانية التقريبية لليلة', msg: 'الميزانية لليلة', required: true, unitSuffix: 'لليلة', hint: 'لكل الغرف معاً، بالدينار الكويتي — أو اختر «مرنة»', full: true }),
       field(F, { type: 'radio', name: 'stars', label: 'تصنيف الفندق', msg: 'التصنيف', required: true, seg: true, value: 'any', options: STARS, full: true })
     )
   ];
@@ -68,15 +68,15 @@ export function hotels(ctx) {
     ['هل يتم الحجز بمجرد إرسال النموذج؟', 'لا. الرسالة طلب خيارات فقط. لا يتم أي حجز أو دفع قبل أن تختار الخيار المناسب وتوافق على تفاصيله وشروطه مع فريقنا.'],
     ['ماذا عن الإلغاء أو تغيير التواريخ؟', 'شروط الإلغاء والتعديل تختلف من فندق لآخر وحسب نوع السعر (قابل للاسترداد أو غير قابل للاسترداد). اسأل فريقنا عن شروط كل خيار قبل التأكيد.'],
     ['هل أقدر أطلب فندقاً معيّناً بالاسم؟', 'نعم. افتح «أضف تفضيلاتك» واكتب اسم الفندق في خانة «فندق محدد»، وسيتحقق الفريق من توفره في تواريخك.'],
-    ['ماذا تعني الميزانية لليلة؟', 'هي المبلغ التقريبي الذي تفضّل ألا تتجاوزه لليلة الواحدة لكل الغرف معاً، بالعملة التي تختارها. إذا لم تكن متأكداً اختر «مرنة».'],
+    ['ماذا تعني الميزانية لليلة؟', 'هي المبلغ التقريبي الذي تفضّل ألا تتجاوزه لليلة الواحدة لكل الغرف معاً، بالدينار الكويتي. إذا لم تكن متأكداً اختر «مرنة».'],
     paymentFaq(ctx),
     hoursFaq(ctx)
   ];
   page.jsonld = [faqJsonLd(faqs)];
 
   const offersSection = offers.length
-    ? `<section class="section section--tight" aria-labelledby="offers-h"><div class="container"><div class="section-head"><h2 id="offers-h">عروض فنادق متاحة حالياً</h2><p>عروض على الفنادق موثّقة وبتاريخ صلاحية واضح. الأسعار والتوفر يتم تأكيدها عند الطلب.</p></div><div class="offers">${offers.map((o) => `<article class="offer"><h3>${esc(o.titleAr)}</h3><p>${esc(o.detailsAr)}</p><small>ساري حتى ${esc(o.validUntil)} · ${esc(o.termsAr)}</small></article>`).join('')}</div></div></section>`
-    : ctx.cfg.showPlaceholders
+    ? `<section class="section section--tight" aria-labelledby="offers-h"><div class="container"><div class="section-head"><h2 id="offers-h">عروض فنادق متاحة حالياً</h2><p>عروض على الفنادق موثّقة وبتاريخ صلاحية واضح. الأسعار والتوفر يتم تأكيدها عند الطلب.</p></div><div class="offers">${offers.map((o) => `<article class="offer"><h3>${esc(o.titleAr)}</h3><p>${esc(o.detailsAr)}</p>${o.validUntil || o.termsAr ? `<small>${o.validUntil ? 'ساري حتى ' + esc(o.validUntil) : ''}${o.validUntil && o.termsAr ? ' · ' : ''}${esc(o.termsAr || '')}</small>` : ''}</article>`).join('')}</div></div></section>`
+    : ctx.cfg.showPlaceholders && ctx.cfg.showEditorNotes !== false
       ? `<section class="section section--tight" aria-label="ملاحظة للفريق"><div class="container"><div class="ph-block"><strong>قسم «عروض فنادق» مخفي تلقائياً.</strong> يظهر فقط عند إضافة عروض حقيقية قابلة للإثبات (اسم العرض، التفاصيل، تاريخ الصلاحية، الشروط) في <code>site.config.json → services.hotelOffers</code>. لا تُستخدم عبارة «عروض على الفنادق» بدون عرض موثّق.</div></div></section>`
       : '';
 
@@ -86,7 +86,7 @@ ${hero(ctx, {
     h1: 'حجز فنادق <span class="accent">يناسب وجهتك وميزانيتك</span>',
     lead: 'تدور على حجز فندق لرحلتك القادمة؟ مع الفنار للسياحة، أرسل لنا المدينة وتواريخ الإقامة وعدد الضيوف والميزانية، وفريقنا يساعدك في الحصول على خيارات فنادق تناسب احتياجك.',
     points: [['pin', 'الموقع الذي يناسب برنامجك'], ['star', 'التصنيف الذي تفضّله'], ['bed', 'نوع وعدد الغرف حسب ضيوفك']],
-    assure: ['بدون دفع عبر الموقع', 'تراجع الرسالة قبل إرسالها', 'الميزانية بالعملة التي تناسبك'],
+    assure: ['بدون دفع عبر الموقع', 'تراجع الرسالة قبل إرسالها', 'الميزانية بالدينار الكويتي'],
     mediaOpts: { file: 'hotels/hero-room', alt: 'جناح فندقي بسرير مزدوج وإطلالة على أفق المدينة', icon: 'bed', need: 'غرفة فندقية (Hero)', pos: '80% 55%', posMobile: '78% 55%' },
     formHtml: form
   })}
@@ -252,7 +252,7 @@ export function honeymoon(ctx) {
       { type: 'date', name: 'depart', label: 'تاريخ السفر', required: true, minToday: true },
       { type: 'counter', name: 'nights', label: 'عدد الليالي', msg: 'عدد الليالي', min: 2, max: 30, value: 7 }
     ]),
-    stack(field(F, { type: 'budget', name: 'budget', label: 'الميزانية التقريبية لشخصين', msg: 'الميزانية لشخصين', required: true, unitSuffix: 'لشخصين (إجمالي)', hint: 'إجمالي الرحلة لشخصين — اختاروا العملة أو «مرنة»', placeholder: 'مثال: 1500', full: true }))
+    stack(field(F, { type: 'budget', name: 'budget', label: 'الميزانية التقريبية لشخصين', msg: 'الميزانية لشخصين', required: true, unitSuffix: 'لشخصين (إجمالي)', hint: 'إجمالي الرحلة لشخصين بالدينار الكويتي — أو اختاروا «مرنة»', placeholder: 'مثال: 1500', full: true }))
   ];
   const optional = [
     stack(
@@ -269,7 +269,7 @@ export function honeymoon(ctx) {
   const faqs = [
     ['هل تقدمون رحلات شهر عسل متكاملة؟', pk ? 'نعم، يمكنكم طلب رحلة متكاملة وسيرسل لكم فريقنا الخيارات المتاحة لوجهتكم وتواريخكم.' : 'أرسلوا استفساركم عن رحلة متكاملة، وسيوضح لكم فريقنا ما يمكن ترتيبه لوجهتكم وتواريخكم. وإذا كنتم تحتاجون الطيران فقط أو طيران + فندق، اختاروا ذلك في نوع الطلب.'],
     ['لم نحدد الوجهة بعد، هل يمكنكم الاقتراح؟', 'نعم. فعّلوا خيار «لم نحدد الوجهة بعد» واذكروا التجربة التي تفضّلونها والميزانية، وسيقترح عليكم الفريق وجهات تناسبكم.'],
-    ['كيف نحدد الميزانية لشخصين؟', 'اكتبوا المبلغ الإجمالي التقريبي للرحلة لشخصين بالعملة التي تختارونها. الميزانية تتأثر بالوجهة والموسم ومستوى الإقامة، وإذا لم تكونوا متأكدين اختاروا «مرنة».'],
+    ['كيف نحدد الميزانية لشخصين؟', 'اكتبوا المبلغ الإجمالي التقريبي للرحلة لشخصين بالدينار الكويتي. الميزانية تتأثر بالوجهة والموسم ومستوى الإقامة، وإذا لم تكونوا متأكدين اختاروا «مرنة».'],
     ['هل يتم الحجز بمجرد إرسال الطلب؟', 'لا. الطلب استفسار فقط، ولا يتم أي حجز أو دفع قبل موافقتكم على الخيار وتفاصيله وشروطه.'],
     ['ماذا عن التأشيرات؟', 'متطلبات التأشيرة تختلف حسب الجنسية والوجهة. نوصي بالتحقق منها من المصادر الرسمية للوجهة قبل السفر.'],
     paymentFaq(ctx),
@@ -281,7 +281,7 @@ ${hero(ctx, {
     eyebrow: 'رحلات شهر العسل — ' + esc(ctx.cfg.brand.nameAr),
     h1: 'رحلة شهر العسل <span class="accent">تبدأ بتفاصيل تناسبكم</span>',
     lead: 'شاطئ هادئ، طبيعة وجبال، أو مدينة تحبونها؟ أخبرونا بالوجهة أو اتركوها مفتوحة، مع التواريخ والميزانية لشخصين، ونساعدكم في ترتيب الخيارات المناسبة لكم.',
-    points: [['palm', 'وجهة محددة أو اقتراحات'], ['heart', 'التجربة التي تحلمون بها'], ['wallet', 'ميزانية لشخصين بعملتكم']],
+    points: [['palm', 'وجهة محددة أو اقتراحات'], ['heart', 'التجربة التي تحلمون بها'], ['wallet', 'ميزانية لشخصين بالدينار']],
     assure: ['بدون دفع عبر الموقع', 'تراجعون الرسالة قبل إرسالها', 'خصوصية تفاصيلكم'],
     mediaOpts: { file: 'honeymoon/hero-resort', alt: 'طاولة عشاء لشخصين على شرفة منتجع مطلة على البحر عند الغروب', icon: 'palm', need: 'منتجع رومانسي (Hero)', pos: '52% 55%', posMobile: '50% 55%' },
     formHtml: form
@@ -349,7 +349,7 @@ export function umrah(ctx) {
     ], 3),
     stack(
       field(F, { type: 'checks', name: 'services', label: 'ما الذي تحتاجه؟', msg: 'الخدمات المطلوبة', required: true, value: ['flights', 'hotelMakkah', 'hotelMadinah'], options: services, full: true }),
-      field(F, { type: 'budget', name: 'budget', label: 'الميزانية التقريبية للفرد', msg: 'الميزانية للفرد', required: true, unitSuffix: 'للفرد', hint: 'اختر العملة أو «مرنة»', placeholder: 'مثال: 350', full: true })
+      field(F, { type: 'budget', name: 'budget', label: 'الميزانية التقريبية للفرد', msg: 'الميزانية للفرد', required: true, unitSuffix: 'للفرد', hint: 'بالدينار الكويتي — أو اختر «مرنة»', placeholder: 'مثال: 350', full: true })
     )
   ];
   const optional = [
@@ -454,7 +454,7 @@ export function privacy(ctx) {
   const body = `
 <section class="section"><div class="container"><article class="legal">
   <h1>سياسة الخصوصية</h1>
-  ${ctx.cfg.integrations.privacyPolicyApproved ? '' : `<p class="ph-block">مسودة هيكلية فقط — يجب أن يراجعها مستشار قانوني ويعتمدها ${esc(b.nameAr)} قبل الإطلاق، بما يتوافق مع لائحة حماية خصوصية البيانات المعمول بها في دولة الكويت وأي متطلبات أخرى منطبقة.</p>`}
+  ${ctx.cfg.integrations.privacyPolicyApproved || ctx.cfg.showEditorNotes === false ? '' : `<p class="ph-block">مسودة هيكلية فقط — يجب أن يراجعها مستشار قانوني ويعتمدها ${esc(b.nameAr)} قبل الإطلاق، بما يتوافق مع لائحة حماية خصوصية البيانات المعمول بها في دولة الكويت وأي متطلبات أخرى منطبقة.</p>`}
   <h2>من نحن</h2><p>${ctx.ph(b.legalNameAr, 'الاسم القانوني للشركة')}، الكويت. للتواصل: واتساب أو هاتف <span dir="ltr">${esc(ctx.cfg.contact.phoneDisplay || '')}</span>.</p>
   <h2>البيانات التي نجمعها</h2>
   <p>عند تعبئة نموذج الطلب: تفاصيل الرحلة التي تدخلها (مثل الوجهة والتواريخ وعدد المسافرين والميزانية والتفضيلات والاسم إن أدخلته). لا نطلب في النموذج رقم جواز سفر أو هوية أو بيانات دفع.</p>
@@ -474,7 +474,7 @@ export function terms(ctx) {
   const body = `
 <section class="section"><div class="container"><article class="legal">
   <h1>الشروط والأحكام</h1>
-  <p class="ph-block">مسودة هيكلية فقط — تُستكمل وتُعتمد من ${esc(b.nameAr)} ومستشار قانوني قبل الإطلاق.</p>
+  ${ctx.cfg.showEditorNotes === false ? '' : `<p class="ph-block">مسودة هيكلية فقط — تُستكمل وتُعتمد من ${esc(b.nameAr)} ومستشار قانوني قبل الإطلاق.</p>`}
   <h2>طبيعة الخدمة</h2><p>نماذج هذا الموقع لطلب خيارات واستفسارات فقط، ولا تمثل حجزاً أو عرض سعر ملزماً. يتم أي حجز فقط بعد موافقتك على التفاصيل والسعر والشروط مع فريقنا.</p>
   <h2>الأسعار والتوفر</h2><p>الأسعار والتوفر تحددهما الفنادق وشركات الطيران ومزودو الخدمة وقد تتغير حتى لحظة التأكيد.</p>
   <h2>الإلغاء والتعديل</h2><p>${ctx.ph('', 'سياسة الإلغاء والتعديل المعتمدة لدى الفنار، بالإضافة إلى شروط كل مزود')}</p>

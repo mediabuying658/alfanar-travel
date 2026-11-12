@@ -1,5 +1,12 @@
 # Changelog
 
+## 12 Nov 2026 — Feedback round 6
+- Branded calendar date picker (Arabic months/days, past dates disabled, stay/trip range with night count, auto-opens the end date, keyboard support, bottom sheet on phones) and branded budget stepper; browser spin arrows hidden.
+- Currency is a fixed «د.ك» label (not editable); copy says «بالدينار الكويتي».
+- Pre-launch strip and all yellow editor notes removed (`showEditorNotes: false`). The «عروض فنادق» section is now always shown with three template cards to edit in `site.config.json → services.hotelOffers` (or the admin panel) — replace them before running ads.
+- Transparent PNG favicon; wider desktop layout; blue backdrop so pulling the page down never shows white.
+- Fixed a regression that stopped custom dropdowns from opening.
+
 ## 12 Nov 2026 — Feedback round 5 + handover
 - Business details from the client's Drive (MOCI commercial-registration extract, company profile): legal name «شركة الفنار ترافل للسياحة والسفر ذ.م.م», CR 397884, licence 2019/8205, address (خيطان – الفروانية، قطعة 7، شارع 70، قيصرية الرجعان، محل 10), hours 9:00 am–10:00 pm, IATA member since 2015.
 - Header is now fixed (always visible); the mobile menu opens directly beneath it and the page behind is locked while it is open; choosing a menu link closes it.
