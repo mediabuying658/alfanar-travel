@@ -64,7 +64,7 @@ if (!cfg.integrations.gtmContainerId) missing.push('integrations.gtmContainerId'
 ['commercialRegistration', 'tourismLicense'].forEach((k) => { if (!cfg.licensing[k]) missing.push('licensing.' + k); });
 ['phoneDisplay', 'workingHoursAr'].forEach((k) => { if (!cfg.contact[k]) missing.push('contact.' + k); });
 if (!cfg.integrations.privacyPolicyApproved) missing.push('integrations.privacyPolicyApproved (legal review)');
-const imgs = ['hotels/hero-room', 'hotels/lobby', 'hotels/breakfast', 'flights/hero-airport', 'honeymoon/hero-resort', 'umrah/hero-makkah']
+const imgs = ['hotels/hero-room', 'hotels/lobby', 'hotels/breakfast', 'flights/hero-airport', 'honeymoon/hero-resort', 'umrah/hero-kaaba-golden-hour']
   .filter((f) => !fs.existsSync(path.join(root, 'public/assets/img', f + '.jpg')));
 if (imgs.length) missing.push('licensed images: ' + imgs.map((f) => f + '.jpg').join(', '));
 

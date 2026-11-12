@@ -20,9 +20,9 @@ Pipeline: originals in `images-src/<page>/<slot>.png` → `node tools/images.mjs
 | `05_Honeymoon_Hero_Resort.png` | `honeymoon/hero-resort` | /flights/honeymoon hero · Home card | 52% 55% | طاولة عشاء لشخصين على شرفة منتجع مطلة على البحر عند الغروب |
 | 〃 | 〃 | «اختاروا طابع رحلتكم» | 80% 50% | جلسة خاصة بجانب مسبح منتجع على البحر |
 | 〃 | 〃 | FAQ side photo | 25% 50% | غروب الشمس على البحر من شرفة منتجع |
-| `06_Umrah_Hero_Makkah_Suite.png` | `umrah/hero-makkah` | /flights/umrah hero · Home card | 63% 50% | غرفة فندقية بإطلالة على المسجد الحرام والكعبة المشرفة |
-| 〃 | 〃 | «تفاصيل نراعيها في طلبك» | 62% 55% | إطلالة على الكعبة المشرفة والمسجد الحرام من نافذة غرفة فندقية |
-| 〃 | 〃 | FAQ side photo | 72% 30% | برج الساعة في مكة المكرمة عند الغروب |
+| `Golden_Hour_at_the_Grand_Mosque.png` | `umrah/hero-kaaba-golden-hour` | /flights/umrah hero · Home card | 70% 55% | الكعبة المشرفة وصحن المسجد الحرام عند الغروب |
+| `ChatGPT_Image_Nov_12_2026_04_45_02_PM.png` | `umrah/pilgrim-airport-ihram` | «تفاصيل نراعيها في طلبك» (4:5) | 35% 40% | معتمر بلباس الإحرام يجر حقيبته في صالة المطار عند الغروب |
+| `ChatGPT_Image_Nov_12_2026_04_45_24_PM.png` | `umrah/couple-kaaba-sunset` | Umrah FAQ side photo (4:5) | 50% 60% | معتمر وزوجته أمام الكعبة المشرفة عند الغروب |
 
 ## Destination photos (client-supplied, 12 Nov 2026 — AI-generated illustrations)
 

@@ -328,7 +328,7 @@ export function umrah(ctx) {
     route: '/flights/umrah', service: 'umrah', form: true,
     title: 'رحلات العمرة | ترتيبات تناسب احتياجك – الفنار للسياحة',
     description: 'استفسر عن ترتيبات رحلة العمرة من مدينتك: التواريخ، عدد المسافرين، مدة الإقامة في مكة المكرمة والمدينة المنورة، احتياجات السكن والميزانية — وتواصل مع فريق الفنار للسياحة عبر واتساب.',
-    cta: 'استفسر عن خيارات العمرة', ctaShort: 'استفسر عن العمرة', heroPreload: 'umrah/hero-makkah'
+    cta: 'استفسر عن خيارات العمرة', ctaShort: 'استفسر عن العمرة', heroPreload: 'umrah/hero-kaaba-golden-hour'
   };
   const services = [['flights', 'تذاكر طيران'], ['hotelMakkah', 'سكن في مكة المكرمة'], ['hotelMadinah', 'سكن في المدينة المنورة'], ['transfers', 'تنقلات (المطار / بين المدينتين)']];
   if (S.umrahVisaServiceConfirmed) services.push(['visa', 'المساعدة في التأشيرة']);
@@ -384,7 +384,7 @@ ${hero(ctx, {
     lead: 'حدّد مواعيد السفر وعدد المسافرين ومدة الإقامة في مكة المكرمة والمدينة المنورة، واذكر احتياجات السكن والتنقل، ونساعدك في الاطلاع على الخيارات المناسبة لرحلتك.',
     points: [['calendar', 'مواعيد ومدة تناسبك'], ['mosque', 'إقامة مكة والمدينة حسب طلبك'], ['accessible', 'مراعاة كبار السن والتنقل']],
     assure: ['بدون دفع عبر الموقع', 'لا نطلب بيانات الجواز الآن', 'تراجع الرسالة قبل إرسالها'],
-    mediaOpts: { file: 'umrah/hero-makkah', alt: 'غرفة فندقية بإطلالة على المسجد الحرام والكعبة المشرفة', icon: 'mosque', need: 'مكة المكرمة (Hero)', pos: '63% 50%', posMobile: '60% 50%' },
+    mediaOpts: { file: 'umrah/hero-kaaba-golden-hour', alt: 'الكعبة المشرفة وصحن المسجد الحرام عند الغروب', icon: 'mosque', need: 'مكة المكرمة (Hero)', pos: '70% 55%', posMobile: '72% 50%' },
     formHtml: form
   })}
 ${steps('كيف نرتّب طلبك؟', 'خطوات واضحة تبدأ برسالة واحدة.', [
@@ -404,11 +404,11 @@ ${steps('كيف نرتّب طلبك؟', 'خطوات واضحة تبدأ برسا
         <li>${I.users}<div><b>ترتيب الغرف للعائلة</b><span>ثنائية أو ثلاثية أو رباعية أو غرف متصلة.</span></div></li>
       </ul>
     </div>
-    ${media(ctx, { file: 'umrah/hero-makkah', alt: 'إطلالة على الكعبة المشرفة والمسجد الحرام من نافذة غرفة فندقية', icon: 'mosque', need: 'مكة المكرمة', ar: '5/4', pos: '62% 55%' })}
+    ${media(ctx, { file: 'umrah/pilgrim-airport-ihram', alt: 'معتمر بلباس الإحرام يجر حقيبته في صالة المطار عند الغروب', icon: 'mosque', need: 'معتمر في المطار', ar: '4/5', pos: '35% 40%' })}
   </div>
 </section>
 ${trust(ctx, 'استفسر براحة واطمئنان', TRUST_ITEMS(ctx))}
-${faq('faq', 'أسئلة شائعة عن رحلات العمرة', faqs, media(ctx, { file: 'umrah/hero-makkah', alt: 'برج الساعة في مكة المكرمة عند الغروب', icon: 'mosque', need: 'مكة المكرمة', ar: '4/5', pos: '72% 30%' }))}
+${faq('faq', 'أسئلة شائعة عن رحلات العمرة', faqs, media(ctx, { file: 'umrah/couple-kaaba-sunset', alt: 'معتمر وزوجته أمام الكعبة المشرفة عند الغروب', icon: 'mosque', need: 'معتمران أمام الكعبة', ar: '4/5', pos: '50% 60%' }))}
 ${finalCta('ابدأ ترتيبات رحلتك للعمرة', 'أرسل التفاصيل ويكون رقم طلبك معك في رسالة واتساب.', 'استفسر عن خيارات العمرة')}
 `;
   return { page, body };
@@ -427,13 +427,13 @@ export function home(ctx) {
     ['/hotels', 'الفنادق', 'حجز فنادق يناسب وجهتك وميزانيتك.', 'hotels/hero-room', 'bed', 'غرفة فندقية'],
     ['/flights', 'تذاكر الطيران', 'ذهاب وعودة أو وجهات متعددة.', 'flights/hero-airport', 'plane', 'مسافر في المطار'],
     ['/flights/honeymoon', 'شهر العسل', 'رحلة تبدأ بتفاصيل تناسبكم.', 'honeymoon/hero-resort', 'heart', 'منتجع رومانسي'],
-    ['/flights/umrah', 'العمرة', 'ترتيبات تناسب احتياجك.', 'umrah/hero-makkah', 'mosque', 'مكة المكرمة']
+    ['/flights/umrah', 'العمرة', 'ترتيبات تناسب احتياجك.', 'umrah/hero-kaaba-golden-hour', 'mosque', 'مكة المكرمة']
   ];
   const body = `
 <section class="section" aria-labelledby="h1">
   <div class="container">
     <div class="section-head"><p class="eyebrow" style="color:var(--gold-700)">${esc(ctx.cfg.brand.nameAr)}</p><h1 id="h1" style="font-size:clamp(28px,4vw,44px)">ما الخدمة التي تحتاجها لرحلتك؟</h1><p>اختر الخدمة واملأ التفاصيل، ونجهّز لك رسالة واتساب كاملة ترسلها لفريقنا.</p></div>
-    <div class="cat-grid">${cats.map(([r, t, p, img, ic, need]) => `<a class="cat" href="${ctx.link(r)}">${media(ctx, { file: img, alt: '', icon: ic, need, ar: null, sizes: '(max-width: 1000px) 50vw, 25vw', pos: { 'hotels/hero-room': '80% 55%', 'flights/hero-airport': '72% 50%', 'honeymoon/hero-resort': '52% 55%', 'umrah/hero-makkah': '63% 50%' }[img] })}<div class="cat__body"><h2>${t}</h2><p>${p}</p><span class="cat__go">ابدأ الطلب ${I.arrowStart}</span></div></a>`).join('')}</div>
+    <div class="cat-grid">${cats.map(([r, t, p, img, ic, need]) => `<a class="cat" href="${ctx.link(r)}">${media(ctx, { file: img, alt: '', icon: ic, need, ar: null, sizes: '(max-width: 1000px) 50vw, 25vw', pos: { 'hotels/hero-room': '80% 55%', 'flights/hero-airport': '72% 50%', 'honeymoon/hero-resort': '52% 55%', 'umrah/hero-kaaba-golden-hour': '70% 55%' }[img] })}<div class="cat__body"><h2>${t}</h2><p>${p}</p><span class="cat__go">ابدأ الطلب ${I.arrowStart}</span></div></a>`).join('')}</div>
   </div>
 </section>
 ${steps('كيف تعمل الخدمة؟', '', [
