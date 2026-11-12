@@ -195,7 +195,6 @@ function header(ctx, page) {
   const cta = page.cta ? `<a class="btn header-cta" href="#booking" data-cta="header">${I.whatsapp}<span>${esc(page.ctaShort || page.cta)}</span></a>` : `<a class="btn header-cta" href="${ctx.link('/hotels')}" data-cta="header_home">${I.whatsapp}<span>ابدأ طلبك</span></a>`;
   return `
 <header class="site-header">
-  ${ctx.cfg.showPlaceholders ? `<div class="ph-banner" role="note">نسخة ما قبل الإطلاق: العناصر المظللة بالأصفر بانتظار تأكيد الفنار قبل الإطلاق.</div>` : ''}
   <div class="container">
     ${brandBlock(ctx)}
     <nav class="nav" id="site-nav" aria-label="القائمة الرئيسية">
@@ -296,8 +295,9 @@ ${preloadHero}
 <link rel="stylesheet" href="${ctx.asset('css/site.css')}">
 <script>/* switching service tabs: skip the intro animations so the page swaps calmly */try{if(sessionStorage.getItem('af_nav')==='tab'){document.documentElement.classList.add('no-intro');sessionStorage.removeItem('af_nav')}}catch(e){}</script>
 ${page.form ? `<script type="speculationrules">${JSON.stringify({ prefetch: [{ source: 'list', urls: ['/hotels', '/flights', '/flights/honeymoon', '/flights/umrah'].filter((r) => r !== page.route).map((r) => ctx.link(r)), eagerness: 'moderate' }] })}</script>` : ''}
-<link rel="icon" href="${ctx.asset('img/brand/favicon.ico')}" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="${ctx.asset('img/brand/favicon-32.png')}">
+<link rel="icon" type="image/png" sizes="48x48" href="${ctx.asset('img/brand/favicon-48.png')}">
+<link rel="icon" type="image/png" sizes="192x192" href="${ctx.asset('img/brand/icon-192.png')}">
 <link rel="icon" type="image/png" sizes="16x16" href="${ctx.asset('img/brand/favicon-16.png')}">
 <link rel="apple-touch-icon" href="${ctx.asset('img/brand/apple-touch-icon.png')}">
 <link rel="manifest" href="${ctx.asset('site.webmanifest')}">
