@@ -1,0 +1,19 @@
+{
+  "name": "alfanar-travel-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Al Fanar Travel — Arabic RTL booking landing pages (hotels, flights, honeymoon, umrah) with WhatsApp lead flow",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "preview": "node build.mjs --preview",
+    "images": "node tools/images.mjs",
+    "serve": "node build.mjs && npx --yes serve dist -l 3000"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  }
+}

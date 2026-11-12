@@ -1,0 +1,81 @@
+# Pages CMS (https://pagescms.org) — a private editing panel for this GitHub repo.
+# Sign in at https://app.pagescms.org with GitHub, open this repo, pick the branch (use "staging" for drafts).
+# Photos: upload replacements in the Media library (images-src/…, same file name) — the deploy re-optimises them.
+# Every save is a commit; Vercel then builds a private preview (staging) or the live site (main).
+media:
+  input: images-src
+  output: images-src
+  categories: [image]
+content:
+  - name: settings
+    label: إعدادات الموقع وبيانات الشركة
+    type: file
+    path: site.config.json
+    format: json
+    fields:
+      - { name: showPlaceholders, label: "وضع ما قبل الإطلاق (يُظهر العناصر الناقصة ويمنع الأرشفة)", type: boolean }
+      - { name: siteUrl, label: "رابط الموقع النهائي (https://…)", type: string }
+      - name: brand
+        label: العلامة
+        type: object
+        fields:
+          - { name: nameAr, label: الاسم بالعربي, type: string }
+          - { name: nameEn, label: الاسم بالإنجليزي, type: string }
+          - { name: legalNameAr, label: الاسم القانوني, type: string }
+          - { name: logoFile, label: "ملف الشعار (داخل public/assets/img)", type: string }
+          - { name: logoFileOnLight, label: "ملف الشعار على خلفية فاتحة", type: string }
+      - name: contact
+        label: التواصل
+        type: object
+        fields:
+          - { name: whatsappNumber, label: "رقم واتساب (أرقام فقط مع رمز الدولة، مثال 96522286633)", type: string }
+          - { name: whatsappDisplay, label: رقم واتساب كما يظهر, type: string }
+          - { name: phoneDisplay, label: رقم الهاتف كما يظهر, type: string }
+          - { name: addressAr, label: العنوان, type: string }
+          - { name: workingHoursAr, label: ساعات العمل, type: string }
+          - { name: mapsUrl, label: رابط خرائط Google, type: string }
+          - { name: mapsLat, label: خط العرض, type: number }
+          - { name: mapsLng, label: خط الطول, type: number }
+      - name: licensing
+        label: الترخيص
+        type: object
+        fields:
+          - { name: commercialRegistration, label: رقم السجل التجاري, type: string }
+          - { name: tourismLicense, label: رقم الترخيص, type: string }
+          - { name: iataAccreditation, label: اعتماد IATA, type: string }
+          - { name: _source, label: "مصدر البيانات (ملاحظة داخلية)", type: text }
+      - name: integrations
+        label: الربط والتتبع
+        type: object
+        fields:
+          - { name: leadEndpoint, label: "مسار حفظ الطلبات", type: string }
+          - { name: gtmContainerId, label: "Google Tag Manager ID (GTM-XXXX)", type: string }
+          - { name: privacyPolicyApproved, label: "تمت مراجعة سياسة الخصوصية قانونياً", type: boolean }
+      - name: services
+        label: الخدمات والعبارات والعروض
+        type: object
+        fields:
+          - { name: honeymoonPackagesConfirmed, label: "نقدم باقات شهر عسل متكاملة", type: boolean }
+          - { name: umrahPackagesConfirmed, label: "نقدم باقات عمرة", type: boolean }
+          - { name: umrahVisaServiceConfirmed, label: "نقدم خدمة تأشيرة العمرة", type: boolean }
+          - name: designClaims
+            label: عبارات الثقة (تظهر في قسم «لماذا الفنار»)
+            type: object
+            list: true
+            fields:
+              - { name: textAr, label: العنوان, type: string }
+              - { name: detailAr, label: الوصف, type: text }
+              - { name: icon, label: "الأيقونة (star, users, clock, wallet, mosque, shield, chat…)", type: string }
+              - { name: pages, label: "الصفحات (all أو مسارات مفصولة بفاصلة مثل /flights/umrah)", type: string }
+              - { name: approved, label: معتمدة وتظهر, type: boolean }
+              - { name: approvedBy, label: "اعتمدها (ملاحظة داخلية)", type: string }
+          - name: hotelOffers
+            label: "عروض فنادق (تظهر فقط إذا أضفت عرضاً حقيقياً)"
+            type: object
+            list: true
+            fields:
+              - { name: titleAr, label: اسم العرض, type: string }
+              - { name: detailsAr, label: التفاصيل, type: text }
+              - { name: validUntil, label: "صالح حتى (YYYY-MM-DD)", type: string }
+              - { name: termsAr, label: الشروط, type: text }
+              - { name: source, label: "مرجع داخلي للتحقق", type: string }

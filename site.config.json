@@ -1,0 +1,91 @@
+{
+  "_README": "Single source of truth for business details. Empty strings = NOT YET APPROVED and render as visible placeholders while showPlaceholders is true. Run `node build.mjs` after editing.",
+  "siteUrl": "https://www.REPLACE-WITH-AL-FANAR-DOMAIN.com",
+  "showPlaceholders": true,
+  "brand": {
+    "nameAr": "الفنار للسياحة والسفر",
+    "nameEn": "Al Fanar Travel & Tourism",
+    "legalNameAr": "شركة الفنار ترافل للسياحة والسفر ذ.م.م",
+    "logoFile": "brand/logo-white.png",
+    "logoFileOnLight": "brand/logo-blue.png"
+  },
+  "contact": {
+    "whatsappNumber": "96522286633",
+    "whatsappDisplay": "+965 2228 6633",
+    "phoneDisplay": "+965 2228 6633",
+    "addressAr": "خيطان – الفروانية، قطعة 7، شارع 70، قيصرية الرجعان، محل 10",
+    "workingHoursAr": "9:00 صباحاً – 10:00 مساءً",
+    "mapsUrl": "https://www.google.com/maps?q=29.2768043,47.9625277",
+    "mapsLat": 29.2768043,
+    "mapsLng": 47.9625277
+  },
+  "licensing": {
+    "commercialRegistration": "397884",
+    "tourismLicense": "2019/8205",
+    "iataAccreditation": "عضو منذ 2015",
+    "_source": "CR extract, Ministry of Commerce & Industry, printed 3 Nov 2024 (Drive folder 1cwAzoRB…): CR 397884, licence 2019/8205 dated 04/03/2019, activities: travel & tourism + Umrah trips. IATA membership since 2015 per company profile."
+  },
+  "integrations": {
+    "leadEndpoint": "/api/lead",
+    "gtmContainerId": "",
+    "privacyPolicyApproved": false
+  },
+  "services": {
+    "honeymoonPackagesConfirmed": false,
+    "umrahPackagesConfirmed": false,
+    "umrahVisaServiceConfirmed": false,
+    "hotelOffers": [],
+    "designClaims": [
+      {
+        "textAr": "خبرة في تنظيم الرحلات",
+        "detailAr": "فريق يعرف تفاصيل الحجز والسفر ويساعدك في اختيار الأنسب لرحلتك.",
+        "icon": "star",
+        "pages": "all",
+        "approved": true,
+        "approvedBy": "client (12 Nov 2026)"
+      },
+      {
+        "textAr": "متابعة شخصية لرحلتك",
+        "detailAr": "شخص من فريقنا يتابع طلبك من أول رسالة حتى التأكيد.",
+        "icon": "users",
+        "pages": "all",
+        "approved": true,
+        "approvedBy": "client (12 Nov 2026)"
+      },
+      {
+        "textAr": "دعم على مدار الساعة",
+        "detailAr": "فريق الدعم متاح لمساعدتك قبل السفر وأثناءه.",
+        "icon": "clock",
+        "pages": "all",
+        "approved": true,
+        "approvedBy": "client (12 Nov 2026)"
+      },
+      {
+        "textAr": "أسعار تنافسية حسب التواريخ والوجهات",
+        "detailAr": "نبحث لك عن خيارات تناسب ميزانيتك وتواريخ سفرك.",
+        "icon": "wallet",
+        "pages": "all",
+        "approved": true,
+        "approvedBy": "client (12 Nov 2026)"
+      },
+      {
+        "textAr": "فنادق قريبة من الحرم",
+        "detailAr": "خيارات سكن على مسافات مختلفة من الحرم حسب طلبك.",
+        "icon": "mosque",
+        "pages": "/flights/umrah",
+        "approved": true,
+        "approvedBy": "client (12 Nov 2026)"
+      }
+    ]
+  },
+  "_hotelOffersFormat": [
+    {
+      "titleAr": "اسم العرض",
+      "detailsAr": "تفاصيل يمكن إثباتها",
+      "validUntil": "YYYY-MM-DD",
+      "termsAr": "الشروط",
+      "source": "مرجع داخلي للتحقق"
+    }
+  ],
+  "_designClaims_note": "Claims that appear in the 4 page designs. They render on the site only after Al Fanar sets approved=true with evidence."
+}

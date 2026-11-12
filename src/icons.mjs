@@ -1,0 +1,40 @@
+// Inline SVG icon set (stroke icons, currentColor). Decorative by default (aria-hidden).
+const s = (d, extra = '') =>
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"${extra}>${d}</svg>`;
+
+export const icons = {
+  bed: s('<path d="M3 18v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6"/><path d="M3 18h18M3 21v-3M21 21v-3"/><path d="M6 10V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"/><rect x="7" y="7.5" width="4" height="2.5" rx="1"/><rect x="13" y="7.5" width="4" height="2.5" rx="1"/>'),
+  plane: s('<path d="M10.5 13.5 3 11l1.5-1.5 8 1 4-4.5c1-1 2.6-1.4 3.4-.6.8.8.4 2.4-.6 3.4l-4.5 4 1 8L14.5 22 12 14.5"/><path d="m6 17-2 2M9 20l-1.5 1.5"/>'),
+  heart: s('<path d="M12 20s-7.5-4.6-9-9.3C2 7.4 4.2 4.5 7.3 4.5c1.9 0 3.4 1 4.7 2.7 1.3-1.7 2.8-2.7 4.7-2.7 3.1 0 5.3 2.9 4.3 6.2-1.5 4.7-9 9.3-9 9.3Z"/>'),
+  mosque: s('<path d="M4 21V12M20 21V12"/><path d="M3 12h2M19 12h2"/><path d="M4 9.5 4 8M20 9.5V8"/><path d="M7 21v-6a5 5 0 0 1 10 0v6"/><path d="M12 6c-2.8 1.3-5 3.4-5 6h10c0-2.6-2.2-4.7-5-6Z"/><path d="M12 3v3"/><path d="M3 21h18"/><path d="M10.5 21v-3a1.5 1.5 0 0 1 3 0v3"/>'),
+  calendar: s('<rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 14h2M14 14h2M8 17.5h2"/>'),
+  users: s('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14a6 6 0 0 1 3.5 6"/>'),
+  wallet: s('<path d="M4 7h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h11"/><path d="M16 13.5h4"/><circle cx="16.5" cy="13.5" r=".6" fill="currentColor"/>'),
+  check: s('<circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.8 2.8L16.5 9.5"/>'),
+  tick: s('<path d="m5 12.5 4.5 4.5L19 7.5"/>', ' stroke-width="2.4"'),
+  shield: s('<path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m9 12 2 2 4-4"/>'),
+  chat: s('<path d="M20 12a8 8 0 0 1-11.8 7L4 20l1.1-3.9A8 8 0 1 1 20 12Z"/><path d="M8.5 11h7M8.5 14h4.5"/>'),
+  pin: s('<path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/>'),
+  star: s('<path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9L12 3.5Z"/>'),
+  coffee: s('<path d="M4 9h13v5a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6V9Z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3c-.6 1 .6 2 0 3M12 3c-.6 1 .6 2 0 3"/>'),
+  lobby: s('<path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-5h6v5"/><path d="M9 11h.01M15 11h.01M12 11h.01"/>'),
+  suitcase: s('<rect x="4" y="7" width="16" height="12" rx="2.5"/><path d="M9 7V5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v2"/><path d="M8 7v12M16 7v12"/><path d="M7 21h1M16 21h1"/>'),
+  clock: s('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
+  lock: s('<rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><path d="M12 14.5v2"/>'),
+  edit: s('<path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/>'),
+  copy: s('<rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>'),
+  arrowStart: s('<path d="M19 12H5M11 6l-6 6 6 6"/>'),
+  chevron: s('<path d="m6 9 6 6 6-6"/>', ' stroke-width="2.2"'),
+  menu: s('<path d="M4 7h16M4 12h16M4 17h16"/>', ' stroke-width="2"'),
+  phone: s('<path d="M5 4h3.5l1.5 4.5-2.2 1.4a11 11 0 0 0 5.3 5.3l1.4-2.2L19 14.5V18a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2Z"/>'),
+  send: s('<path d="M21 3 10 14"/><path d="m21 3-7 18-4-7-7-4 18-7Z"/>'),
+  list: s('<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/>'),
+  sun: s('<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/>'),
+  palm: s('<path d="M12 21c0-5 .5-8.5 2-11"/><path d="M14 10c-1.5-3-4.5-4-7.5-3 1.6.4 3.6 1.6 4.5 3.7"/><path d="M14 10c1-3 4-4.5 7-3.8-1.6.5-3.4 1.8-4 3.8"/><path d="M14 10c2.5-.3 5 1 6 3.5-1.4-.8-3.3-1.2-5-.5"/><path d="M14 10c-2.4.2-4.6 1.8-5.2 4.3 1.2-1 3-1.6 4.7-1.4"/><path d="M7 21h10"/>'),
+  seat: s('<path d="M7 4v9a2 2 0 0 0 2 2h7"/><path d="M7 13H5M16 15l2 6M10 15l-1.5 6"/><path d="M10 9h5"/>'),
+  route: s('<circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.5"/>'),
+  car: s('<path d="M5 16V11l2-5h10l2 5v5"/><path d="M3 16h18v3H3z"/><circle cx="7.5" cy="16" r="1.2"/><circle cx="16.5" cy="16" r="1.2"/><path d="M5 11h14"/>'),
+  accessible: s('<circle cx="12" cy="4.5" r="1.8"/><path d="M12 7v6h5l2 5"/><path d="M8.5 10.5a5.5 5.5 0 1 0 6.8 7.5"/><path d="M9 9h6"/>'),
+  lighthouse: s('<path d="M9.5 21 10.5 9h3l1 12"/><path d="M8 21h8"/><path d="M10 9V7h4v2"/><path d="M12 7V5"/><path d="M4 5.5 9 7M20 5.5 15 7"/><path d="M10.2 13h3.6M9.9 17h4.2"/>', ' stroke-width="1.6"'),
+  whatsapp: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2Zm5.8 14.06c-.25.69-1.44 1.32-1.98 1.37-.51.05-1 .24-3.36-.7-2.84-1.12-4.65-4.03-4.79-4.22-.14-.19-1.15-1.53-1.15-2.92s.73-2.07.98-2.36c.26-.28.56-.35.75-.35l.54.01c.17.01.41-.07.64.49.24.57.81 1.98.88 2.12.07.14.12.31.02.5-.09.19-.14.31-.28.47-.14.17-.3.37-.42.5-.14.14-.29.29-.12.57.16.28.73 1.2 1.57 1.95 1.08.96 1.99 1.26 2.27 1.4.28.14.45.12.61-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.64-.14.26.09 1.66.78 1.94.92.28.14.47.21.54.33.07.12.07.69-.17 1.38Z"/></svg>'
+};
