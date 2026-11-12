@@ -509,8 +509,8 @@
     function bump(d) {
       if (input.disabled) return;
       var v = parseFloat(input.value) || 0;
-      v = v + d * step;            // exact step from whatever was typed (e.g. 25 → 125)
-      input.value = v > 0 ? v : '';  // stepping below zero clears the field
+      v = Math.max(0, v + d * step);   // exact +/-100 from whatever is there (1250 → 1350), never below 0
+      input.value = v;
 
       input.dispatchEvent(new Event('input', { bubbles: true }));
       input.dispatchEvent(new Event('change', { bubbles: true }));

@@ -779,7 +779,7 @@ select.select { transition: border-color .2s, box-shadow .2s; }
 .form-card.is-done .success { animation: fadeUp .45s var(--ease-out) both; }
 .form-card:not(.is-done) .lead-form { animation: fadeIn .35s var(--ease) both; }
 .copy-status:not(:empty) { animation: fadeIn .3s both; }
-.counter.is-bump input { animation: bump .25s var(--ease); }
+.counter.is-bump input { animation: tickText .3s ease; }
 .chip span { transition: background-color .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease), box-shadow .2s var(--ease), transform .15s; }
 .chip input:active + span { transform: scale(.96); }
 .btn { transition: transform .2s var(--ease), box-shadow .25s var(--ease), background-color .2s var(--ease), color .2s; }
@@ -940,7 +940,7 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 .num__steps button:hover { background: var(--blue); color: #fff; }
 .num__steps button:active { transform: scale(.92); }
 .num.is-disabled .num__steps { opacity: .4; pointer-events: none; }
-.num.is-bump .input { animation: bump .25s var(--ease); }
+.num.is-bump .input { animation: tick .35s ease; }
 .num:focus-within .num__steps button { background: #E3E8F6; }
 
 /* date button */

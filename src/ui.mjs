@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { icons as I } from './icons.mjs';
 
 export const esc = (s = '') => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -19,7 +20,14 @@ export function makeCtx({ cfg, mode, route, root }) {
       const p = r === '/' ? 'index.html' : r.replace(/^\//, '') + '/index.html';
       return rel + p + hash;
     },
-    asset: (p) => (mode === 'prod' ? '/assets/' : rel + 'assets/') + p,
+    asset: (p) => {
+      const url = (mode === 'prod' ? '/assets/' : rel + 'assets/') + p;
+      if (!/\.(css|js)$/.test(p)) return url;
+      // content hash → browsers always load the latest CSS/JS after an update
+      const f = path.join(root, 'public/assets', p);
+      const v = fs.existsSync(f) ? crypto.createHash('sha1').update(fs.readFileSync(f)).digest('hex').slice(0, 8) : Date.now().toString(36);
+      return url + '?v=' + v;
+    },
     // value or visible placeholder
     ph: (value, label) => {
       if (value) return esc(value);
@@ -113,7 +121,7 @@ export function field(form, d) {
     case 'single-check':
       return `<div class="field${d.full ? ' f-full' : ''}" data-field="${d.name}" data-type="single-check" data-msg-label="${esc(d.msg || d.label)}"${d.showWhen ? ` data-show-when="${d.showWhen}" hidden` : ''}><label class="check-inline"><input type="checkbox" id="${id}" name="${d.name}" value="yes"${dis}> ${esc(d.label)}</label><span class="err" id="${id}-err"></span></div>`;
     case 'budget':
-      return wrap(form, d, `<div class="budget"><input class="input" type="number" inputmode="decimal" min="1" step="1" data-step="100" id="${id}" name="${d.name}"${reqAttr(d)} ${describedBy(form, d)} placeholder="${esc(d.placeholder || 'مثال: 60')}"${dis}><span class="budget__cur" aria-label="دينار كويتي" title="دينار كويتي">د.ك</span><input type="hidden" name="${d.name}_currency" value="KWD"><label class="check-inline"><input type="checkbox" name="${d.name}_flexible" value="yes"${dis}> مرنة</label></div>`);
+      return wrap(form, d, `<div class="budget"><input class="input" type="number" inputmode="numeric" min="0" step="1" data-step="100" value="0" id="${id}" name="${d.name}"${reqAttr(d)} ${describedBy(form, d)}${dis}><span class="budget__cur" aria-label="دينار كويتي" title="دينار كويتي">د.ك</span><input type="hidden" name="${d.name}_currency" value="KWD"></div>`);
     default:
       throw new Error('Unknown field type ' + d.type);
   }

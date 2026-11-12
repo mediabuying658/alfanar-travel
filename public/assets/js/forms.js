@@ -17,7 +17,7 @@
     min: function (n) { return 'الحد الأدنى ' + n; },
     max: function (n) { return 'الحد الأقصى ' + n; },
     maxOf: function (l) { return 'لا يمكن أن يزيد عن عدد ' + l; },
-    budget: 'أدخل ميزانية تقريبية بالدينار أو اختر «مرنة»',
+    budget: 'ارفع الميزانية باستخدام الأسهم أو اكتب المبلغ بالدينار',
     tooLong: 'النص طويل جداً',
     summary: function (n) { return n === 1 ? 'يرجى تصحيح حقل واحد قبل الإرسال.' : 'يرجى تصحيح ' + n + ' حقول قبل الإرسال.'; }
   };
@@ -149,7 +149,7 @@
       var flexOn = flex && flex.checked;
       var n = parseFloat(v);
       if (required && !flexOn && !(n > 0)) msg = MSG.budget;
-      else if (v && !(n > 0)) msg = MSG.budget;
+      else if (v && n < 0) msg = MSG.budget;
     } else if (type === 'checks') {
       if (required && (!v || !v.length)) msg = MSG.chooseOne;
     } else if (type === 'radio') {
@@ -206,7 +206,7 @@
         var curLabel = 'د.ك';
         if (cur && cur.selectedIndex >= 0) { var co = cur.options[cur.selectedIndex]; curLabel = co.getAttribute('data-short') || co.textContent; }
         if (flex && flex.checked) out = 'مرنة / غير محددة';
-        else if (v) out = v + ' ' + curLabel + (f.getAttribute('data-unit-suffix') ? ' ' + f.getAttribute('data-unit-suffix') : '');
+        else if (v && parseFloat(v) > 0) out = v + ' ' + curLabel + (f.getAttribute('data-unit-suffix') ? ' ' + f.getAttribute('data-unit-suffix') : '');
       } else if (type === 'checks') {
         out = (v || []).map(function (x) { return optionLabel(form, name, x); }).join('، ');
       } else if (type === 'radio' || type === 'select') {
@@ -237,6 +237,7 @@
       var name = f.getAttribute('data-field');
       var v = valueOf(form, name);
       if (f.getAttribute('data-type') === 'budget') { var flex = ctrl(form, name + '_flexible'); data[name + '_flexible'] = !!(flex && flex.checked); var cur = ctrl(form, name + '_currency'); if (cur) data[name + '_currency'] = cur.value; }
+      if (f.getAttribute('data-type') === 'budget' && !(parseFloat(v) > 0)) return;
       if (v !== '' && !(Array.isArray(v) && !v.length)) data[name] = v;
     });
     return data;
