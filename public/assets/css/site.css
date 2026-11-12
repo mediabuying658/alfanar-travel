@@ -1014,3 +1014,8 @@ body:has(.hero) { background: linear-gradient(var(--blue) 0, var(--blue) calc(va
 .counter.is-bump input { animation: tickText .3s ease; }
 @keyframes tick { 0% { border-color: var(--line); } 35% { border-color: var(--blue); background-color: #F3F5FC; } 100% { border-color: var(--line); background-color: #fff; } }
 @keyframes tickText { 0% { opacity: 1; } 35% { opacity: .55; transform: translateY(1px); } 100% { opacity: 1; transform: none; } }
+@media (min-width: 1001px) {
+  .hero__contact-text { gap: 2px; }
+  .hero__hours { display: inline-flex; align-items: center; gap: 6px; color: var(--blue) !important; font-weight: 600; }
+  .hero__hours svg { width: 15px; height: 15px; flex: none; }
+}

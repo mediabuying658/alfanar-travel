@@ -335,15 +335,12 @@ ${consent(ctx)}
 /* Desktop-only panel under the headline: fills the space beside the (taller) form with useful content */
 function heroExtras(ctx, strip) {
   const c = ctx.cfg.contact;
-  const wa = (c.whatsappNumber || '').replace(/\D/g, '');
-  const contact = wa ? `
+  const contact = c.mapsUrl ? `
       <div class="hero__contact">
-        <span class="hero__contact-icon">${I.chat}</span>
-        <span class="hero__contact-text"><b>تفضّل التواصل المباشر؟</b><span>فريق ${esc(ctx.cfg.brand.nameAr)} على واتساب والهاتف</span></span>
+        <span class="hero__contact-icon">${I.lobby}</span>
+        <span class="hero__contact-text"><b>تفضّل بزيارتنا في مكتبنا</b><span>${esc(c.addressAr || 'الكويت')}</span>${c.workingHoursAr ? `<span class="hero__hours">${I.clock}${esc(c.workingHoursAr)}</span>` : ''}</span>
         <span class="hero__contact-actions">
-          <a class="hero__chip hero__chip--wa" href="https://wa.me/${wa}?text=${encodeURIComponent('السلام عليكم، عندي استفسار عن خدمات ' + ctx.cfg.brand.nameAr + '.')}" target="_blank" rel="noopener" data-wa-direct="hero">${I.whatsapp}<span dir="ltr">${esc(c.whatsappDisplay)}</span></a>
-          ${c.phoneDisplay ? `<a class="hero__chip" href="tel:${c.phoneDisplay.replace(/[^\d+]/g, '')}" data-cta="hero_phone">${I.phone}<span>اتصل بنا</span></a>` : ''}
-          ${c.mapsUrl ? `<a class="hero__chip" href="${esc(c.mapsUrl)}" target="_blank" rel="noopener" data-cta="hero_map">${I.pin}<span>موقعنا</span></a>` : ''}
+          <a class="hero__chip hero__chip--wa" href="${esc(c.mapsUrl)}" target="_blank" rel="noopener" data-cta="hero_map">${I.pin}<span>موقعنا على الخريطة</span></a>
         </span>
       </div>` : '';
   return `

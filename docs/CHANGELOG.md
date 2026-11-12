@@ -1,5 +1,12 @@
 # Changelog
 
+## 12 Nov 2026 — Feedback round 7
+- Budget field removed from all four forms (and the budget FAQs, tips and copy). The hotels H1 keeps «يناسب وجهتك وميزانيتك» because it is the agreed keyword headline.
+- Desktop hero card: no direct WhatsApp/phone buttons — now «تفضّل بزيارتنا في مكتبنا» with the address, hours and «موقعنا على الخريطة».
+- Working hours: daily 10:00 am – 2:00 am.
+- Umrah: new Kaaba banner, pilgrim-in-ihram and couple-at-the-Kaaba photos; services start unselected.
+- CSS/JS links carry a content hash so browsers always load the latest version.
+
 ## 12 Nov 2026 — Feedback round 6
 - Branded calendar date picker (Arabic months/days, past dates disabled, stay/trip range with night count, auto-opens the end date, keyboard support, bottom sheet on phones) and branded budget stepper; browser spin arrows hidden.
 - Currency is a fixed «د.ك» label (not editable); copy says «بالدينار الكويتي».
