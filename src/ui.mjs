@@ -160,7 +160,7 @@ export function formCard(ctx, { id, service, serviceLabel, prefix, title, sub, r
     <ol>
       <li>افتح واتساب من الزر أدناه (إذا لم يُفتح تلقائياً).</li>
       <li>تأكد من الرسالة ثم <strong>اضغط «إرسال»</strong> — لن يصلنا طلبك قبل ذلك.</li>
-      <li>يتواصل معك فريق ${brand} في نفس المحادثة${ctx.cfg.contact.workingHoursAr ? ' خلال ساعات العمل: ' + esc(ctx.cfg.contact.workingHoursAr) : ''}.</li>
+      <li>يتواصل معك فريق ${brand} في نفس المحادثة.</li>
     </ol>
     <p class="hint" style="margin:0 0 6px">نص الرسالة:</p>
     <pre class="msg-preview" data-msg-preview tabindex="0"></pre>
@@ -249,7 +249,8 @@ function footer(ctx) {
           <li>واتساب: ${waDirect}</li>
           <li>هاتف: ${c.phoneDisplay ? `<a href="tel:${c.phoneDisplay.replace(/[^\d+]/g, '')}" dir="ltr">${esc(c.phoneDisplay)}</a>` : ctx.ph('', 'رقم الهاتف')}</li>
           <li>الموقع: ${c.mapsUrl ? `<a href="${esc(c.mapsUrl)}" target="_blank" rel="noopener" data-cta="footer_map">${c.addressAr ? esc(c.addressAr) + ' — ' : ''}عرض موقعنا على خرائط Google</a>` : ctx.ph(c.addressAr, 'عنوان المكتب في الكويت')}</li>
-          <li>ساعات العمل: ${ctx.ph(c.workingHoursAr, 'ساعات العمل')}</li>
+          <li>ساعات عمل الفرع: ${ctx.ph(c.workingHoursAr, 'ساعات العمل')}</li>
+          ${c.phoneHoursAr ? `<li>استقبال المكالمات: ${esc(c.phoneHoursAr)}</li>` : ''}
         </ul>
       </div>
     </div>
@@ -348,7 +349,7 @@ function heroExtras(ctx, strip) {
   const contact = c.mapsUrl ? `
       <div class="hero__contact">
         <span class="hero__contact-icon">${I.lobby}</span>
-        <span class="hero__contact-text"><b>تفضّل بزيارتنا في مكتبنا</b><span>${esc(c.addressAr || 'الكويت')}</span>${c.workingHoursAr ? `<span class="hero__hours">${I.clock}${esc(c.workingHoursAr)}</span>` : ''}</span>
+        <span class="hero__contact-text"><b>تفضّل بزيارتنا في مكتبنا</b><span>${esc(c.addressAr || 'الكويت')}</span>${c.workingHoursAr ? `<span class="hero__hours">${I.clock}ساعات عمل الفرع: ${esc(c.workingHoursAr)}</span>` : ''}</span>
         <span class="hero__contact-actions">
           <a class="hero__chip hero__chip--wa" href="${esc(c.mapsUrl)}" target="_blank" rel="noopener" data-cta="hero_map">${I.pin}<span>موقعنا على الخريطة</span></a>
         </span>

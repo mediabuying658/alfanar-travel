@@ -11,7 +11,7 @@ const notes = (f, ph) => field(f, { type: 'textarea', name: 'notes', label: 'م�
 const stack = (...h) => `<div class="f-grid">${h.join('')}</div>`;
 
 const paymentFaq = (ctx) => ['ما طرق الدفع المتاحة؟', `يوضّح لك فريقنا طرق الدفع المعتمدة عند تأكيد الحجز. ${ctx.ph('', 'طرق الدفع المعتمدة لدى الفنار — بانتظار التأكيد')}`];
-const hoursFaq = (ctx) => ['متى يردّ الفريق على طلبي؟', `نرد على الرسائل في نفس محادثة واتساب خلال ساعات العمل: ${ctx.ph(ctx.cfg.contact.workingHoursAr, 'ساعات العمل الرسمية')}. تأكد أنك ضغطت «إرسال» داخل واتساب حتى يصلنا الطلب.`];
+const hoursFaq = (ctx) => ['متى يمكنني التواصل معكم أو زيارة الفرع؟', `ساعات عمل الفرع: ${ctx.ph(ctx.cfg.contact.workingHoursAr, 'ساعات عمل الفرع')}.${ctx.cfg.contact.phoneHoursAr ? ' استقبال المكالمات الهاتفية: ' + esc(ctx.cfg.contact.phoneHoursAr) + '.' : ''} وللطلبات عبر النموذج، تأكد أنك ضغطت «إرسال» داخل واتساب حتى يصلنا طلبك.`];
 
 const TRUST_ITEMS = (ctx) => [
   ['lock', 'لا دفع عبر هذه الصفحة', 'النموذج يجهّز رسالة فقط؛ لا نطلب بيانات بطاقة أو أي دفعة من خلال الموقع.'],

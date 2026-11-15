@@ -32,7 +32,8 @@ content:
           - { name: whatsappDisplay, label: رقم واتساب كما يظهر, type: string }
           - { name: phoneDisplay, label: رقم الهاتف كما يظهر, type: string }
           - { name: addressAr, label: العنوان, type: string }
-          - { name: workingHoursAr, label: ساعات العمل, type: string }
+          - { name: workingHoursAr, label: ساعات عمل الفرع, type: string }
+          - { name: phoneHoursAr, label: ساعات استقبال المكالمات, type: string }
           - { name: mapsUrl, label: رابط خرائط Google, type: string }
           - { name: mapsLat, label: خط العرض, type: number }
           - { name: mapsLng, label: خط الطول, type: number }
