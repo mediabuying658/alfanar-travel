@@ -142,10 +142,6 @@ export function formCard(ctx, { id, service, serviceLabel, prefix, title, sub, r
     <p class="req-legend">الحقول المعلّمة بـ <b aria-hidden="true">*</b><span class="sr-only">نجمة</span> مطلوبة</p>
     <fieldset class="f-stack"><legend class="sr-only">بيانات الطلب الأساسية</legend>${required.join('')}</fieldset>
     ${disclosure ? `<p class="disclosure" style="margin-top:14px">${disclosure}</p>` : ''}
-    <details class="more">
-      <summary><span>أضف تفضيلاتك <small>(اختياري — يساعدنا نرسل خيارات أدق)</small></span></summary>
-      <div class="more__body"><fieldset><legend class="sr-only">تفضيلات اختيارية</legend>${optional.join('')}</fieldset></div>
-    </details>
     <div class="form-errors-summary" role="alert" aria-live="assertive"></div>
     <div class="form-actions">
       <button type="submit" class="btn btn--wa btn--block">${I.whatsapp}<span>${esc(cta)}</span></button>
@@ -180,17 +176,15 @@ export function formCard(ctx, { id, service, serviceLabel, prefix, title, sub, r
 /* ---------------- layout ---------------- */
 const NAV = [
   { route: '/hotels', label: 'الفنادق' },
-  { route: '/flights', label: 'تذاكر الطيران', children: [
-    { route: '/flights', label: 'تذاكر الطيران', note: 'رحلات ذهاب وعودة ومتعددة الوجهات' },
-    { route: '/flights/honeymoon', label: 'شهر العسل', note: 'تخطيط رحلة العرسان' },
-    { route: '/flights/umrah', label: 'العمرة', note: 'ترتيبات رحلة العمرة' }
-  ] }
+  { route: '/flights', label: 'تذاكر الطيران' },
+  { route: '/flights/honeymoon', label: 'شهر العسل' },
+  { route: '/flights/umrah', label: 'العمرة' }
 ];
 
 function brandBlock(ctx) {
   const b = ctx.cfg.brand;
-  if (b.logoFile) return `<a class="brand" href="${ctx.link('/')}" aria-label="${esc(b.nameAr)} — الصفحة الرئيسية"><img src="${ctx.asset('img/' + b.logoFile)}" alt="Al-Fanar Travel &amp; Tourism — ${esc(b.nameAr)}" width="345" height="290"></a>`;
-  return `<a class="brand" href="${ctx.link('/')}" aria-label="${esc(b.nameAr)} — الصفحة الرئيسية"><span class="brand__mark" style="color:var(--yellow)">${I.lighthouse}</span><span class="brand__text" lang="en"><span class="brand__en1">AL FANAR</span><span class="brand__en2">TRAVEL &amp; TOURISM</span></span><span class="sr-only" lang="ar">${esc(b.nameAr)}</span></a>`;
+  if (b.logoFile) return `<a class="brand" href="${ctx.link('/hotels')}" aria-label="${esc(b.nameAr)}"><img src="${ctx.asset('img/' + b.logoFile)}" alt="Al-Fanar Travel &amp; Tourism — ${esc(b.nameAr)}" width="345" height="290"></a>`;
+  return `<a class="brand" href="${ctx.link('/hotels')}" aria-label="${esc(b.nameAr)}"><span class="brand__mark" style="color:var(--yellow)">${I.lighthouse}</span><span class="brand__text" lang="en"><span class="brand__en1">AL FANAR</span><span class="brand__en2">TRAVEL &amp; TOURISM</span></span><span class="sr-only" lang="ar">${esc(b.nameAr)}</span></a>`;
 }
 
 function header(ctx, page) {
@@ -257,7 +251,6 @@ function footer(ctx) {
     <div class="footer-bottom">
       <span>© <span data-year>${new Date().getFullYear()}</span> ${esc(b.legalNameAr || b.nameAr)}. ${L.commercialRegistration ? 'سجل تجاري: ' + esc(L.commercialRegistration) + ' · ' : ctx.cfg.showPlaceholders ? ctx.ph('', 'رقم السجل التجاري') + ' · ' : ''}${L.tourismLicense ? 'رقم الترخيص: ' + esc(L.tourismLicense) : ctx.cfg.showPlaceholders ? ctx.ph('', 'رقم الترخيص السياحي') : ''}</span>
       <span class="footer-note">الصور المعروضة في الموقع لأغراض العرض والإلهام، وتختلف الفنادق والخدمات الفعلية حسب الخيار الذي تؤكده مع فريقنا.</span>
-      <button type="button" data-open-consent>إعدادات ملفات تعريف الارتباط</button>
     </div>
   </div>
 </footer>`;
@@ -336,7 +329,6 @@ ${body}
 </main>
 ${footer(ctx)}
 ${page.cta ? `<div class="sticky-cta"><a class="btn btn--wa btn--block" href="#booking" data-cta="sticky_mobile">${I.whatsapp}<span>${esc(page.cta)}</span></a></div>` : ''}
-${consent(ctx)}
 </body>
 </html>
 `;

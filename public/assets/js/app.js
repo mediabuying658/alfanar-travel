@@ -28,23 +28,14 @@
     if (CFG.debug) console.info('[AF track]', payload);
   };
 
-  /* ---------- Consent (Google Consent Mode v2) ---------- */
-  var CONSENT_KEY = 'af_consent_v1';
+  /* ---------- Consent (Google Consent Mode v2) ----------
+     No cookie banner (client decision): measurement and ad signals are granted by default. */
   gtag('consent', 'default', {
-    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
-    analytics_storage: 'denied', functionality_storage: 'granted', security_storage: 'granted',
-    wait_for_update: 500
+    ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted',
+    analytics_storage: 'granted', functionality_storage: 'granted', security_storage: 'granted'
   });
-  AF.consent = AF.get(LS, CONSENT_KEY); // {analytics:bool, ads:bool, ts}
-  function applyConsent(c) {
-    gtag('consent', 'update', {
-      analytics_storage: c.analytics ? 'granted' : 'denied',
-      ad_storage: c.ads ? 'granted' : 'denied',
-      ad_user_data: c.ads ? 'granted' : 'denied',
-      ad_personalization: c.ads ? 'granted' : 'denied'
-    });
-  }
-  if (AF.consent) applyConsent(AF.consent);
+  AF.consent = { analytics: true, ads: true };
+  try { LS && LS.removeItem('af_consent_v1'); } catch (e) {}
 
   function loadGTM() {
     if (!CFG.gtmContainerId || window.__afGtm) return;
@@ -54,29 +45,10 @@
     s.async = true; s.src = 'https://www.googletagmanager.com/gtm.js?id=' + encodeURIComponent(CFG.gtmContainerId);
     document.head.appendChild(s);
   }
-  // GTM loads in all cases; Consent Mode keeps tags in cookieless/denied state until the user accepts.
+  
   loadGTM();
 
-  function initConsentBanner() {
-    var el = document.getElementById('consent');
-    if (!el) return;
-    var open = function () { el.hidden = false; };
-    if (!AF.consent) open();
-    el.addEventListener('click', function (e) {
-      var b = e.target.closest('[data-consent]');
-      if (!b) return;
-      var v = b.getAttribute('data-consent');
-      var c = { analytics: v === 'all', ads: v === 'all', ts: new Date().toISOString() };
-      AF.consent = c; AF.set(LS, CONSENT_KEY, c); applyConsent(c);
-      if (REDUCE) { el.hidden = true; } else {
-        el.classList.add('is-leaving');
-        setTimeout(function () { el.hidden = true; el.classList.remove('is-leaving'); }, 300);
-      }
-      AF.track('consent_update', { consent_analytics: c.analytics, consent_ads: c.ads });
-      captureAttribution(true);
-    });
-    document.querySelectorAll('[data-open-consent]').forEach(function (b) { b.addEventListener('click', open); });
-  }
+
 
   /* ---------- Attribution (UTM + click IDs) ----------
      UTMs are non-personal campaign labels and are kept for the session.
@@ -335,7 +307,7 @@
     initHeaderOffset(); initDetails(); initReveal();
     keepQuery(); initQuickFill();
     captureAttribution(false);
-    initNav(); initConsentBanner(); initCtas(); initSticky(); initFaq();
+    initNav(); initCtas(); initSticky(); initFaq();
     AF.track('page_view_service', { lp_variant: document.body.dataset.variant || 'a' });
   });
 })();

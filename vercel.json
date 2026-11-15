@@ -35,5 +35,12 @@
       ]
     }
   ],
-  "installCommand": "npm install"
+  "installCommand": "npm install",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/hotels",
+      "permanent": false
+    }
+  ]
 }
