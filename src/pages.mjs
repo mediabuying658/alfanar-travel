@@ -5,6 +5,7 @@ const HOTEL_DESTS = ['دبي', 'أبوظبي', 'الدوحة', 'الرياض', '
 const AIRPORTS = ['الكويت (KWI)', 'الرياض (RUH)', 'جدة (JED)', 'الدمام (DMM)', 'المدينة المنورة (MED)', 'دبي (DXB)', 'أبوظبي (AUH)', 'الشارقة (SHJ)', 'الدوحة (DOH)', 'البحرين (BAH)', 'مسقط (MCT)', 'القاهرة (CAI)', 'الإسكندرية (HBE)', 'عمّان (AMM)', 'بغداد (BGW)', 'البصرة (BSR)', 'إسطنبول (IST)', 'لندن (LHR)', 'باريس (CDG)', 'بيروت (BEY)', 'باكو (GYD)', 'تبليسي (TBS)', 'كوالالمبور (KUL)', 'بانكوك (BKK)', 'ماليه – المالديف (MLE)'];
 const HONEY_DESTS = ['المالديف', 'بالي', 'سانتوريني – اليونان', 'باريس', 'إسطنبول', 'موريشيوس', 'سيشل', 'بوكيت – تايلاند', 'زنجبار', 'جورجيا', 'تركيا', 'سويسرا', 'إيطاليا', 'اليونان'];
 const STARS = [['3', '3 نجوم'], ['4', '4 نجوم'], ['5', '5 نجوم'], ['any', 'لا يهم']];
+const HOTEL_STARS = [['4', '4 نجوم'], ['5', '5 نجوم'], ['any', 'لا يهم']];
 const CABIN = [['economy', 'الدرجة الاقتصادية'], ['premium', 'الاقتصادية الممتازة'], ['business', 'درجة رجال الأعمال'], ['first', 'الدرجة الأولى']];
 const name = (f) => field(f, { type: 'text', name: 'name', label: 'الاسم', msg: 'الاسم', autocomplete: 'name', placeholder: 'كيف نناديك؟', full: true, optionalTag: true });
 const notes = (f, ph) => field(f, { type: 'textarea', name: 'notes', label: 'ملاحظات إضافية', msg: 'ملاحظات', placeholder: ph, full: true });
@@ -46,7 +47,7 @@ export function hotels(ctx) {
     ], 3),
     stack(
       field(F, { type: 'text', name: 'childAges', label: 'أعمار الأطفال', msg: 'أعمار الأطفال', showWhen: 'children>0', placeholder: 'مثال: 4 و 9 سنوات', hint: 'تساعد في معرفة سياسة الفندق وسعر الأطفال', full: true }),
-      field(F, { type: 'radio', name: 'stars', label: 'تصنيف الفندق', msg: 'التصنيف', required: true, seg: true, value: 'any', options: STARS, full: true })
+      field(F, { type: 'radio', name: 'stars', label: 'تصنيف الفندق', msg: 'التصنيف', required: true, seg: true, value: 'any', options: HOTEL_STARS, full: true })
     )
   ];
   const optional = [
