@@ -357,7 +357,7 @@ function heroExtras(ctx, strip) {
     </div>`;
 }
 
-export function hero(ctx, { eyebrow, h1, lead, points, assure, mediaOpts, formHtml }) {
+export function hero(ctx, { eyebrow, h1, lead, trustLine, points, assure, mediaOpts, formHtml }) {
   // Layout from the client designs: copy + form on the blue start side, photo on the end side (left in RTL).
   // The supplied photos keep their subject on the right of the frame, so focal points are set per image (pos / posMobile).
   const strip = [...points, ['lock', assure[0]]];
@@ -369,6 +369,7 @@ export function hero(ctx, { eyebrow, h1, lead, points, assure, mediaOpts, formHt
       <p class="eyebrow">${eyebrow}</p>
       <h1 id="h1">${h1}</h1>
       <p class="hero__lead">${lead}</p>
+      ${trustLine ? `<p class="hero__trust">${I.shield}<span>${trustLine}</span></p>` : ''}
       ${heroExtras(ctx, strip)}
     </div>
     ${formHtml}

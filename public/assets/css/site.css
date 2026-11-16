@@ -204,6 +204,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .hero h1 { color: #fff; font-size: clamp(28px, 4vw, 48px); font-weight: 800; margin-bottom: 18px; letter-spacing: -.01em; }
 .hero h1 .accent { color: var(--gold-400); }
 .hero__lead { font-size: clamp(16px, 1.5vw, 19px); color: rgba(255,255,255,.9); max-width: 34em; }
+.hero__trust { display: flex; align-items: center; gap: 8px; margin: 14px 0 0; font-size: 13.5px; font-weight: 600; color: rgba(255,255,255,.82); max-width: 40em; }
+.hero__trust svg { width: 16px; height: 16px; color: var(--gold-400); flex: none; }
 .hero__points { list-style: none; padding: 0; margin: 24px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; max-width: 560px; }
 .hero__points li { display: flex; flex-direction: column; gap: 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); border-radius: 14px; padding: 14px; font-size: 14.5px; font-weight: 700; line-height: 1.5; backdrop-filter: blur(4px); }
 .hero__points svg { width: 26px; height: 26px; color: var(--gold-400); }
@@ -224,6 +226,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .hero .eyebrow { order: 1; margin-bottom: 6px; }
   .hero h1 { order: 2; margin-bottom: 8px; }
   .hero__lead { order: 3; font-size: 15.5px; line-height: 1.7; margin: 0; }
+  .hero__trust { order: 3; margin: 0; font-size: 12.5px; }
   .hero .form-card { order: 4; }
   .hero__points { order: 5; margin-top: 4px; }
   .hero__assure { order: 6; margin-top: 0; }

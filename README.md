@@ -4,9 +4,9 @@ Four conversion-focused booking pages that turn a visitor into a complete, struc
 
 | Route | Purpose | Google Ads use | Form → WhatsApp CTA |
 |---|---|---|---|
-| `/hotels` | **Primary page** for hotel search traffic | Final URL for حجز فندق / حجوزات الفنادق / حجز فنادق ad groups | اطلب خيارات الفنادق عبر واتساب |
-| `/flights` | General & frequent-flyer ticket requests | Flight ad groups | اطلب خيارات تذاكر الطيران |
-| `/flights/honeymoon` | Honeymoon planning | Honeymoon ad groups | خطّط لرحلة شهر العسل |
+| `/hotels` | **Primary page** for hotel search traffic | Final URL for حجز فندق / حجوزات الفنادق / حجز فنادق ad groups | اطلب فنادق على تواريخك |
+| `/flights` | General & frequent-flyer ticket requests | Flight ad groups | اطلب خياراتك على واتساب |
+| `/flights/honeymoon` | Honeymoon planning | Honeymoon ad groups | ابدأوا تخطيط رحلتكم |
 | `/flights/umrah` | Umrah arrangements | Umrah ad groups | استفسر عن خيارات العمرة |
 | `/` | Category selector (do **not** use as an ad final URL) | — | — |
 | `/privacy`, `/terms` | Legal placeholders (noindex until approved) | — | — |
